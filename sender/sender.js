@@ -1,26 +1,16 @@
 const applicationID = '32BA06D5';
 const namespace = 'urn:x-cast:com.herokuapp.dougflip';
 
+const initCast = require('./lib/initialize-cast');
+
 var session = null;
 
 /**
  * Call initialization for Cast
  */
 if (!chrome.cast || !chrome.cast.isAvailable) {
-    setTimeout(initializeCastApi, 1000);
+    setTimeout(initCast.bind(null, applicationID, sessionListener, receiverListener, onInitSuccess, onError), 1000);
 }
-
-/**
- * initialization
- */
-function initializeCastApi() {
-    var sessionRequest = new chrome.cast.SessionRequest(applicationID);
-    var apiConfig = new chrome.cast.ApiConfig(sessionRequest,
-        sessionListener,
-        receiverListener);
-
-    chrome.cast.initialize(apiConfig, onInitSuccess, onError);
-};
 
 /**
  * initialization success callback
@@ -135,7 +125,7 @@ const appendMessage = msg => console.log(`------- ${msg} -------`);
 /*
 *
 **/
-var host = location.origin.replace(/^http|file/, 'ws');
+var host = location.origin.replace(/^http/, 'ws');
 var ws = new WebSocket(host);
 
 document.getElementById('sendMessage').addEventListener('click', ws.send.bind(ws, { data:'something' }));

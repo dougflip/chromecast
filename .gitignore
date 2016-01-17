@@ -1,5 +1,4 @@
 node_modules
-lib
 npm-debug.log
 *.bin.js
 *.bin.js.map
