@@ -59,7 +59,7 @@
     <script src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
     <script type="text/javascript">
         // websocket stuffs....
-        var host = location.origin.replace(/^http|file/, 'ws')
+        var host = location.origin.replace(/^http|file/, 'ws');
         var ws = new WebSocket(host);
         ws.onmessage = updateCard;
 

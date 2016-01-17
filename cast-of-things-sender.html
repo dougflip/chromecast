@@ -197,15 +197,8 @@ limitations under the License.
 </head>
 
 <body>
-    <table id="wrapper">
-        <tr>
-            <td>
-                <form method="get" action="JavaScript:update();">
-                    <input id="input" class="border" type="text" size="30" onwebkitspeechchange="transcribe(this.value)" x-webkit-speech/>
-                </form>
-            </td>
-        </tr>
-    </table>
+
+    <button id="sendMessage">Send Something!</button>
 
     <!-- Debbugging output -->
     <div style="margin:10px; visibility:hidden;">
@@ -214,7 +207,13 @@ limitations under the License.
     </div>
 
     <script type="text/javascript">
-        document.getElementById("input").focus();
+    var host = location.origin.replace(/^http|file/, 'ws');
+    var ws = new WebSocket(host);
+
+    document.getElementById('sendMessage').addEventListener('click', function(){
+        console.log('---------- Sending data ----------------------------')
+        ws.send({ data: 'something' });
+    });
     </script>
 </body>
 
